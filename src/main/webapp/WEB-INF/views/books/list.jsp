@@ -19,9 +19,12 @@
 <body class="jumbotron">
     <h1>Books List</h1>
 
-    <hr>
+    <a href="/books/form" class="btn btn-primary"> New Book</a>
 
-    <div>${success}</div>
+    <strong>${success}</strong>
+    <strong>${fail}</strong>
+
+    <hr>
 
     <table class="table table-striped">
         <thead>

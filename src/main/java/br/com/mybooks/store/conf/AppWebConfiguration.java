@@ -3,6 +3,7 @@ package br.com.mybooks.store.conf;
 import br.com.mybooks.store.controllers.HomeController;
 import br.com.mybooks.store.daos.BookDao;
 import br.com.mybooks.store.infra.FileSaver;
+import br.com.mybooks.store.models.Cart;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +12,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartResolver;
@@ -21,7 +23,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.servlet.http.HttpServletRequest;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = {HomeController.class, BookDao.class, FileSaver.class})
+@ComponentScan(basePackageClasses = {HomeController.class, BookDao.class, FileSaver.class, Cart.class})
 public class AppWebConfiguration {
 
     /**
@@ -33,6 +35,8 @@ public class AppWebConfiguration {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
+
+        resolver.setExposedContextBeanNames("cart");
 
         return resolver;
     }
@@ -73,5 +77,10 @@ public class AppWebConfiguration {
     @Bean
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

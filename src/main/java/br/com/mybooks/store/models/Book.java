@@ -3,6 +3,7 @@ package br.com.mybooks.store.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -88,5 +89,32 @@ public class Book {
 
     public void setSummaryPath(String summaryPath) {
         this.summaryPath = summaryPath;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Book other = (Book) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+
+    public BigDecimal priceTo(PriceType priceType) {
+        return prices.stream().filter(price -> price.getType().equals(priceType))
+                .findFirst().get().getValue();
     }
 }
