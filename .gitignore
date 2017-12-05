@@ -1,0 +1,5 @@
+.idea/
+
+src/main/webapp/WEB-INF/bower_components
+
+target/

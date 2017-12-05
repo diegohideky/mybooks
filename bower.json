@@ -1,0 +1,20 @@
+{
+  "name": "mybooks",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Diego Hideky <diego.hideky@fotosensores.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6"
+  }
+}
