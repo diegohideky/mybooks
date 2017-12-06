@@ -8,16 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <html>
 <head>
     <title>My books</title>
 
-    <style type="text/css"><%@include file="/static/bower_components/tether/dist/css/tether.min.css"%></style>
-    <style type="text/css"><%@ include file="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" %></style>
+    <c:url value="/static/bower_components" var="bower" />
+
+    <link rel="stylesheet" href="${bower}/tether/dist/css/tether.min.css" />
+    <link rel="stylesheet" href="${bower}/bootstrap/dist/css/bootstrap.min.css" />
 
 </head>
 <body class="jumbotron">
-    <h1>Books List</h1>
+    <h1>
+        <security:authentication property="principal" var="user"/>
+        User: ${user.username}
+    </h1>
 
     <a href="/books/form" class="btn btn-primary"> New Book</a>
 
@@ -48,8 +54,8 @@
     </table>
 </body>
 
-<script type="text/javascript"><%@include file="/static/bower_components/jquery/dist/jquery.min.js"%></script>
-<script type="text/javascript"><%@include file="/static/bower_components/tether/dist/js/tether.min.js"%></script>
-<script type="text/javascript"><%@include file="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"%></script>
+<script type="text/javascript" src="${bower}/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="${bower}/tether/dist/js/tether.min.js"></script>
+<script type="text/javascript" src="${bower}/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </html>

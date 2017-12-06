@@ -6,13 +6,11 @@ import br.com.mybooks.store.models.Book;
 import br.com.mybooks.store.models.PriceType;
 import br.com.mybooks.store.validation.BookValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,6 +42,7 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @CacheEvict(value = "booksHome", allEntries = true)
     public ModelAndView submit(MultipartFile summary, @Valid Book book, BindingResult result,
                                RedirectAttributes redirectAttributes) {
         System.out.print(summary.getOriginalFilename());
@@ -79,5 +78,11 @@ public class BookController {
         modelAndView.addObject("book", book);
 
         return modelAndView;
+    }
+
+    @RequestMapping("/{id}")
+    @ResponseBody
+    public Book jsonDetail(@PathVariable("id") Integer id) {
+        return bookDao.find(id);
     }
 }
