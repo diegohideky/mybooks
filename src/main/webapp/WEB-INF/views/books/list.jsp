@@ -37,6 +37,7 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Preços</th>
                 <th>Pages</th>
             </tr>
         </thead>
@@ -47,6 +48,7 @@
                         <a href="${s:mvcUrl('BC#detail').arg(0, book.id).build()}">${book.title}</a>
                     </td>
                     <td>${book.description}</td>
+                    <td>${book.prices}</td>
                     <td>${book.pages}</td>
                 </tr>
             </c:forEach>

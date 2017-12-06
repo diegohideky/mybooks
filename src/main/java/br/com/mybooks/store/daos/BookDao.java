@@ -23,7 +23,7 @@ public class BookDao {
     }
 
     public List<Book> list() {
-        return manager.createQuery("select b from Book b", Book.class).getResultList();
+        return manager.createQuery("select distinct(b) from Book b join fetch b.prices", Book.class).getResultList();
     }
 
     public Book find(Integer id) {
